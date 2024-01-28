@@ -144,7 +144,9 @@ const App = () => {
           </Button>
 
         </div>
-        <div>  <input type='search' value={search} onChange={handleSearch} name='search' id='search' placeholder='Search Task...' /></div>
+        <div>
+          <input className="form-control" type="search" value={search} onChange={handleSearch} name='search' id='search' placeholder='Search Task...' />
+        </div>
         <div>
           <select className="form-select" value={filterOption} onChange={(e) => {
             setFilterOption(e.target.value)
@@ -180,7 +182,7 @@ const App = () => {
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" ref={closeBtn}
                   onClick={handleClose} data-bs-dismiss="modal" >Close</button>
-                <button type="button" onClick={() => handleClick()} className="btn btn-primary">{task?.id ? "Edit" : "Add"}
+                <button type="button" onClick={() => handleClick()} className="btn btn-primary">{task?.id ? "Edit " : "Add "}
                   Task
                 </button>
               </div>
@@ -192,23 +194,26 @@ const App = () => {
             <>
               {list.map((val, index) => {
                 return (
-                  <div key={index} className="list-group-item list-group-item-action" data-aos="fade-zoom-in" data-aos-offset="200" data-aos-easing="ease-in-sine">
-                    <input className="form-check-input checkbox-input" name="status" onChange={() => handleChangeStatus(val?.id)} type="checkbox" checked={val?.status === 'Completed' ? true : false} value={val?.status} id="status" />
-                    <div className="d-flex justify-content-between">
-                      <div className='d-flex flex-column'>
-                        <div className={val?.status === 'Completed' ? 'completed' : null}>
-                          {val?.task}
+                  <div key={index} className=" list-group-item list-group-item-action" data-aos="fade-zoom-in" data-aos-offset="200" data-aos-easing="ease-in-sine">
+                    <div className='d-flex align-items-start'>
+                      <div className="d-flex justify-content-between" style={{ width: "90%" }}>
+                        <div className="d-flex gap-3">
+                          <input className="form-check-input checkbox-input" name="status" onChange={() => handleChangeStatus(val?.id)} type="checkbox" checked={val?.status === 'Completed' ? true : false} value={val?.status} id="status" />
+                          <div>
+                            <div className={val?.status === 'Completed' ? 'completed' : null}>
+                              {val?.task}
+                            </div>
+                            <div>{val?.time}</div>
+                          </div>
                         </div>
-                        <div>{val?.time}</div>
-                      </div>
-                      <div>
-
-                        <IconButton className='btn' onClick={() => handleEdit(val?.id)} color="info">
-                          <ModeEditOutlineIcon />
-                        </IconButton>
-                        <IconButton className='btn' onClick={() => handleDelete(val?.id)} color="error">
-                          <DeleteOutlineIcon />
-                        </IconButton>
+                        <div>
+                          <IconButton className='btn' onClick={() => handleEdit(val?.id)} color="info">
+                            <ModeEditOutlineIcon />
+                          </IconButton>
+                          <IconButton className='btn' onClick={() => handleDelete(val?.id)} color="error">
+                            <DeleteOutlineIcon />
+                          </IconButton>
+                        </div>
                       </div>
                     </div>
                   </div>
